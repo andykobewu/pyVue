@@ -10,7 +10,7 @@ export default new Router({
   routes: [
     {
       // 登录页
-      path: '/login',
+      path: '/',
       name: 'Login',
       component: Login
     },

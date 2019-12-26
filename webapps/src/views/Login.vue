@@ -1,28 +1,36 @@
 <template>
   <div>
-    <el-form ref="loginForm" :model="form" :rules="rules" label-width="80px" class="login-box">
-      <h3 class="login-title">欢迎登录</h3>
-      <el-form-item label="账号" prop="username">
-        <el-input type="text" placeholder="请输入账号" v-model="form.username"/>
-      </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input type="password" placeholder="请输入密码" v-model="form.password"/>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" v-on:click="onSubmit('loginForm')">登录</el-button>
-      </el-form-item>
-    </el-form>
-
-    <el-dialog
-      title="温馨提示"
-      :visible.sync="dialogVisible"
-      width="30%"
-      :before-close="handleClose">
-      <span>请输入账号和密码</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-      </span>
-    </el-dialog>
+    <el-container>
+      <el-header>
+        <div>
+          <el-page-header  content="欢迎进入自动化测试平台"></el-page-header>
+        </div>
+      </el-header>
+      <el-main>
+        <el-form ref="loginForm" :model="form" :rules="rules" label-width="80px" class="login-box">
+          <h3 class="login-title">欢迎登录</h3>
+          <el-form-item label="账号" prop="username">
+            <el-input type="text" placeholder="请输入账号" v-model="form.username"/>
+          </el-form-item>
+          <el-form-item label="密码" prop="password">
+            <el-input type="password" placeholder="请输入密码" v-model="form.password"/>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" v-on:click="onSubmit('loginForm')">登录</el-button>
+          </el-form-item>
+        </el-form>
+        <el-dialog
+          title="温馨提示"
+          :visible.sync="dialogVisible"
+          width="30%"
+          :before-close="handleClose">
+          <span>请输入账号和密码</span>
+          <span slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          </span>
+        </el-dialog>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
@@ -62,6 +70,13 @@
               return false;
             }
           });
+        },
+        handleClose: function () {
+          this.$confirm('确认关闭？')
+            .then(_ => {
+              done();
+            })
+            .catch(_ => {});
         }
       }
     }
@@ -83,5 +98,11 @@
     text-align: center;
     margin: 0 auto 40px auto;
     color: #303133;
+  }
+  .body {
+    height: 100%;
+    background-image: url(http://upload-images.jianshu.io/upload_images/117091-530891d81ae62dea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240);
+    background-repeat: no-repeat;
+    background-size: 100%;
   }
 </style>
