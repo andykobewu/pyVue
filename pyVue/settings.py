@@ -58,7 +58,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         #指定为vue的页面路径
-        'DIRS': [[os.path.join(BASE_DIR, 'frontend/dist')]],
+        'DIRS': ['webapps/dist'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,10 +111,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
+from django.utils.translation import gettext_lazy as _
+LANGUAGES = [
+    ('zh-Hans', _('Chinese')),
+]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
-TIME_ZONE = 'UTC'
+#TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -128,6 +133,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # 配置静态文件路径
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "frontend/dist/static"),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "webapps/dist"),
+# ]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'webapps/dist/static')]

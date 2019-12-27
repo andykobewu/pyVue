@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import router from './router'
-
+import VueWechatTitle from 'vue-wechat-title';
+Vue.use(VueWechatTitle)
 // 导入 ElementUI
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -19,6 +20,7 @@ new Vue({
   // 启用路由
   router,
   // 启用 ElementUI
-  render: h => h(App)
+  render: h => h(App),
+
 });
-1
+

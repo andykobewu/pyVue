@@ -3,7 +3,7 @@
     <el-container>
       <el-header>
         <div>
-          <el-page-header  content="欢迎进入自动化测试平台"></el-page-header>
+          *** 欢迎进入自动化测试平台 ***
         </div>
       </el-header>
       <el-main>
@@ -104,5 +104,17 @@
     background-image: url(http://upload-images.jianshu.io/upload_images/117091-530891d81ae62dea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240);
     background-repeat: no-repeat;
     background-size: 100%;
+  }
+  .el-header, .el-footer {
+    background-color: #B3C0D1;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+  }
+  .el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    text-align: center;
+    line-height: 160px;
   }
 </style>
