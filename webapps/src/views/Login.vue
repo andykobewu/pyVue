@@ -37,6 +37,7 @@
 <script>
     export default {
       name: "Login",
+
       data() {
         return {
           form: {
@@ -65,6 +66,8 @@
             if (valid) {
               // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
               this.$router.push("/main");
+              // 设置用户登录成功
+              sessionStorage.setItem('isLogin', 'true');
             } else {
               this.dialogVisible = true;
               return false;
