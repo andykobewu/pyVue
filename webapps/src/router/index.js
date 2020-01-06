@@ -6,6 +6,7 @@ import Main from '../views/Main'
 import Appcase from '../views/mainChildrenPage/Appcase'
 import UIcase from '../views/mainChildrenPage/UIcase'
 import Restcase from '../views/mainChildrenPage/Restcase'
+import test from '../views/mainChildrenPage/test'
 
 
 Vue.use(Router);
@@ -17,6 +18,12 @@ export default new Router({
       path: '/',
       name: 'Login',
       component: Login
+    },
+    {
+      // test页
+      path: '/test',
+      name: 'test',
+      component: test
     },
     {
       // 首页

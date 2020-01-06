@@ -46,7 +46,7 @@
                 <el-button slot="trigger"  type="primary">导入脚本</el-button>
               </el-upload>
             </el-col>
-            <a href="../static/moban.xlsx" rel="external nofollow" download="模板">
+            <a href="../static/moban.xlsx" rel="external nofollow" download="前端用例模板">
               <el-button  type="success">下载脚本</el-button>
             </a>
           </el-row>

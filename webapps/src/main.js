@@ -4,7 +4,8 @@ import router from './router'
 import VueWechatTitle from 'vue-wechat-title'
 import Vuex from 'vuex'
 import store from './store'
-
+import api from '../axios_api'
+Vue.use(api)
 Vue.use(Vuex)
 Vue.use(VueWechatTitle)
 // 导入 ElementUI
@@ -47,6 +48,12 @@ router.beforeEach((to, form, next) => {
     if (isLogin != null) {
       // 跳转到首页
       next({path: '/main'});
+    }
+  }
+  else if (to.path == '/test') {
+    if (isLogin != null) {
+      // 跳转到test
+      next({path: '/test'});
     }
   }
 

@@ -17,6 +17,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" v-on:click="onSubmit('loginForm')">登录</el-button>
+            <el-button type="primary" v-on:@click="dialogVisible2">test</el-button>
           </el-form-item>
         </el-form>
         <el-dialog
@@ -57,6 +58,7 @@
 
           // 对话框显示和隐藏
           dialogVisible: false
+
         }
       },
       methods: {
@@ -80,6 +82,10 @@
               done();
             })
             .catch(_ => {});
+        },
+        dialogVisible2: function () {
+          this.$route.push("/test")
+
         }
       }
     }
