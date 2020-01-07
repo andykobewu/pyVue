@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_swagger',# swagger自动生成接口文档
     'api',
+    'login'
 
 ]
 # swagger 配置项
@@ -89,7 +90,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         #指定为vue的页面路径
-        'DIRS': ['webapps/dist'],
+        # 'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR,'webapps\dist')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

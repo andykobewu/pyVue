@@ -20,29 +20,31 @@ from django.views.generic.base import TemplateView
 from django.urls import path
 # 导入swagger的两个Render类
 from rest_framework_swagger.renderers import SwaggerUIRenderer,OpenAPIRenderer
-from api import views
-from  rest_framework import routers
-
+from api import caseviews
+from rest_framework import routers
 # 重要的是如下三行
 from rest_framework.schemas import get_schema_view
 from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
-
+from django.conf.urls import url
+# from pyVue.views import SwaggerSchemaView,ReturnJson,StudentsApiView
 # 利用get_schema_view()方法，传入两个Render类得到一个schema view
 schema_view = get_schema_view(title='API',renderer_classes=[SwaggerUIRenderer,OpenAPIRenderer])
 
-# 路由
-router = routers.DefaultRouter()
-router.register(r'users',views.UserViewSet,base_name='user')
-router.register(r'groups',views.GroupViewSet,base_name='group')
+# # 路由
+# router = routers.DefaultRouter()
+# router.register(r'users',views.UserViewSet,base_name='user')
+# router.register(r'groups',views.GroupViewSet,base_name='group')
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    re_path(r'',TemplateView.as_view(template_name='index.html')),
+    path('/admin', admin.site.urls),
+    # re_path(r'',TemplateView.as_view(template_name='index.html')),
     # 访问localhost:8000/docs/即可
-    path('docs/', schema_view, name='swagger接口文档'),
-    # drf登录
-    #url(r'^api-auth/',include('rest_framework.urls',namespace='rest_framework'))
+    path('docs/', schema_view, name='swagger接口文档'), # # swagger接口文档路由
+    path('test/',caseviews.case_manage),
+    path('/',caseviews.case_manage),
+
+
 
 ]
 
