@@ -37,12 +37,12 @@ schema_view = get_schema_view(title='API',renderer_classes=[SwaggerUIRenderer,Op
 
 
 urlpatterns = [
-    path('/admin', admin.site.urls),
-    # re_path(r'',TemplateView.as_view(template_name='index.html')),
+    path('admin/', admin.site.urls),
+    path('',TemplateView.as_view(template_name='index.html')),
     # 访问localhost:8000/docs/即可
-    path('docs/', schema_view, name='swagger接口文档'), # # swagger接口文档路由
+    path('docs/', schema_view, name='swagger接口文档'), #swagger接口文档路由
     path('test/',caseviews.case_manage),
-    path('/',caseviews.case_manage),
+
 
 
 

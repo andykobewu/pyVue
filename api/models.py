@@ -15,4 +15,4 @@ class Case(models.Model):
         verbose_name_plural = '用例管理'  #显示得复数名称
 
     def __str__(self):
-        return self.productname
+        return self.casename

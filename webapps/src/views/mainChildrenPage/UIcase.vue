@@ -68,9 +68,11 @@
       </el-container>
     </el-main>
   </el-container>
+
 </template>
 
 <script>
+
     export default {
       name: "UIcase",
       data() {
@@ -81,6 +83,8 @@
             date1: '',
             date2: ''
           },
+          newdialogVisible:false,
+
           fileList: [],
           pickerOptions: {
             shortcuts: [{
@@ -133,21 +137,20 @@
          * @param editable 可编辑,默认false
          */
         switchStatus: function (viewType, editable) {
-          var _this = this;
-          _this.viewType = viewType;
-          _this.saveBtnShow = editable;
-          _this.dialogVisible = true;
-          _this.formDisabled = !editable;
+          var _self = this;
+          _self.viewType = viewType;
+          if (viewType == 'EDIT') {
+            _self.updatedialogVisible = true;
+          } else if (viewType == 'ADD') {
+            _self.newdialogVisible = true;
+          }
         },
         /**
          * 新增按钮
          */
-        addFn: function () {
-          var _this = this;
-          _this.switchStatus('ADD', true);
-          _this.$nextTick(function () {
-            _this.$refs.refForm.resetFields();
-          });
+        addFn: function () { // 新增
+          var _self = this;
+          _self.switchStatus('ADD', true); // 切换面板状态
         },
         beforeUpload(file){
           console.log(file,'文件');
