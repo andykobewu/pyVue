@@ -43,11 +43,11 @@
             <el-col><div class="grid-content bg-purple"><el-button type="primary" icon="el-icon-delete">删除</el-button></div></el-col>
             <el-col>
               <el-upload class="upload-demo" ref="upload" action="doUpload" :limit="10" :file-list="fileList" :before-upload="beforeUpload" :show-file-list="false">
-                <el-button slot="trigger"  type="primary">导入脚本</el-button>
+                <el-button slot="trigger"  type="primary">导入用例</el-button>
               </el-upload>
             </el-col>
             <a href="../static/moban.xlsx" rel="external nofollow" download="前端用例模板">
-              <el-button  type="success">下载脚本</el-button>
+              <el-button  type="success">下载用例</el-button>
             </a>
           </el-row>
         </div>
@@ -57,7 +57,7 @@
           <el-row :span="24" style=" float:left;white-space: pre-line;" ref="refForm">
             <el-table :data="tableData" stripe style="width: 100%" :border="true">
               <el-table-column type="selection" prop="id" label="用例编号" width="180"></el-table-column>
-              <el-table-column prop="title" label="用例标题" width="180"></el-table-column>
+              <el-table-column prop="title" label="用例名称" width="180"></el-table-column>
               <el-table-column prop="code" label="脚本"></el-table-column>
               <el-table-column prop="createtime" label="创建时间"></el-table-column>
               <el-table-column prop="casetype" label="用例类型"></el-table-column>
@@ -66,25 +66,66 @@
           </el-row>
         </div>
       </el-container>
+      <el-container>
+        <el-dialog :visible="newdialogVisible" width="60%" @close="cancel">
+          <el-form :inline="true" :model="editForm" ref="newform" label-width="110px" :rules="rules">
+            <el-form-item label="用例名称" prop="name">
+              <el-input v-model="editForm.newcaseName"></el-input>
+            </el-form-item>
+            <el-form-item label="用例编号" prop="id">
+              <el-input v-model="editForm.newcaseId"></el-input>
+            </el-form-item>
+            <el-form-item label="脚本" prop="script">
+              <el-input v-model="editForm.newcasescript"></el-input>
+            </el-form-item>
+            <el-form-item label="用例类型" prop="script">
+              <el-input v-model="editForm.casetype" disabled></el-input>
+            </el-form-item>
+            <el-form-item label="执行结果" prop="script">
+              <el-input v-model="editForm.result" disabled></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" align="center">
+            <el-button type="primary" @click="sureAdd">确定</el-button>
+            <el-button type="primary" @click="cancel">取消</el-button>
+          </div>
+        </el-dialog>
+      </el-container>
     </el-main>
   </el-container>
 
 </template>
 
 <script>
-
+  import axios from 'axios'
     export default {
       name: "UIcase",
       data() {
         return {
+          editForm: {
+            newcaseId: '',
+            newcaseName: '',
+            newcasescript:'',
+            casetype:'UI用例',
+            result:'未执行'
+          },
+          rules: {
+            name: [{required: true, message: '', trigger: 'blur'}],
+            id: [{required: true, message: '', trigger: 'blur'}],
+            script: [{required: true, message: '', trigger: 'blur'}],
+
+          },
           form: {
             name: '',
             region: '',
             date1: '',
             date2: ''
           },
+          urls: {
+            create: '/api/createcase/'
+          },
           newdialogVisible:false,
-
+          viewType: 'ADD',
           fileList: [],
           pickerOptions: {
             shortcuts: [{
@@ -127,6 +168,54 @@
       methods: {
         onSubmit() {
           console.log('submit!');
+        },
+        getcaselist(){
+
+        },
+        sureAdd: function () {
+          var _self = this;
+          _self.getdate();
+          var formUrl = _self.urls.create;
+          var param = {
+            caseName: _self.editForm.newcaseName,
+            // flowAdmin: _self.commonparams.CurrentuserId,
+            systemId: 'AUTOTEST',
+            startTime: _self.startTime
+          };
+          _self.$refs.newform.validate(function (valid) {
+            if (!valid) {
+              _self.$message({
+                message: '请检查输入项是否合法!',
+                type: 'warning'
+              });
+              return;
+            }
+          });
+          service.request({
+            method: 'POST',
+            url: formUrl,
+            data: param,
+            callback: function (code, message, response) {
+              if (response.code === 0) {
+                _self.$refs.reftable.remoteData();
+                _self.$message('用例新增成功!');
+                _self.newdialogVisible = false;
+              } else {
+                _self.$message({message: response.message, type: 'error'});
+              }
+            }
+          });
+        },
+        getdate: function () {
+          var d = new Date();
+          var year = d.getFullYear();
+          var month = (d.getMonth() + 1) < 10 ? '0' + (d.getMonth() + 1) : d.getMonth() + 1;
+          var date = d.getDate() < 10 ? '0' + d.getDate() : d.getDate();
+          var hour = d.getHours() < 10 ? '0' + d.getHours() : d.getHours();
+          var minutes = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
+          var seconds = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds();
+          var myWant = year + '-' + month + '-' + date + ' ' + hour + ':' + minutes + ':' + seconds;
+          this.startTime = myWant;
         },
         resetForm(form) {
           this.$refs[form].clearSelection();
@@ -198,6 +287,13 @@
               this.$message.error(data.msg)
             }
           })
+        },
+        cancel: function () {
+          var _self = this;
+          _self.newdialogVisible = false;
+          _self.$nextTick(function () {
+            _self.editForm.newflowName = '';
+          });
         }
 
       }

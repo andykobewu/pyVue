@@ -1,10 +1,10 @@
 <template>
   <el-dialog :title="viewTitle[viewType]" :visible.sync="newdialogVisible" width="650px" @close="cancel">
-    <yu-form :inline="true" :model="editForm" ref="newform" label-width="110px" :rules="rules">
-      <yu-form-item label="流程名称" prop="name">
-        <yu-input v-model="editForm.newflowName"></yu-input>
-      </yu-form-item>
-    </yu-form>
+    <el-form :inline="true" :model="editForm" ref="newform" label-width="110px" :rules="rules">
+      <el-form-item label="流程名称" prop="name">
+        <el-input v-model="editForm.newflowName"></el-input>
+      </el-form-item>
+    </el-form>
     <div slot="footer" align="center">
       <el-button type="primary" @click="sureAdd">确定</el-button>
       <el-button type="primary" @click="cancel">取消</el-button>
