@@ -67,7 +67,7 @@
         </div>
       </el-container>
       <el-container>
-        <el-dialog :visible="newdialogVisible" width="60%" @close="cancel">
+        <el-dialog :visible="newdialogVisible" width="60%" @close="cancel" title="新增用例">
           <el-form :inline="true" :model="editForm" ref="newform" label-width="110px" :rules="rules">
             <el-form-item label="用例名称" prop="name">
               <el-input v-model="editForm.newcaseName"></el-input>
@@ -76,12 +76,12 @@
               <el-input v-model="editForm.newcaseId"></el-input>
             </el-form-item>
             <el-form-item label="脚本" prop="script">
-              <el-input v-model="editForm.newcasescript"></el-input>
+              <el-input v-model="editForm.newcasescript" type="textarea" placeholder="请输入要执行的脚本"></el-input>
             </el-form-item>
-            <el-form-item label="用例类型" prop="script">
+            <el-form-item label="用例类型" prop="type">
               <el-input v-model="editForm.casetype" disabled></el-input>
             </el-form-item>
-            <el-form-item label="执行结果" prop="script">
+            <el-form-item label="执行结果" prop="result">
               <el-input v-model="editForm.result" disabled></el-input>
             </el-form-item>
           </el-form>
@@ -93,7 +93,6 @@
       </el-container>
     </el-main>
   </el-container>
-
 </template>
 
 <script>
@@ -113,6 +112,8 @@
             name: [{required: true, message: '', trigger: 'blur'}],
             id: [{required: true, message: '', trigger: 'blur'}],
             script: [{required: true, message: '', trigger: 'blur'}],
+            type: [{required: false, message: '', trigger: 'blur'}],
+            result: [{required: false, message: '', trigger: 'blur'}],
 
           },
           form: {
