@@ -18,3 +18,4 @@ class Addcase():
         cursor = db.cursor()  # 创建一个游标对象
     @api_view(['GET', 'POST'])
     def getCase(self):
+        return "test"
