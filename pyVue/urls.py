@@ -14,13 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from django.urls import re_path
 from django.views.generic.base import TemplateView
 from django.urls import path
 # 导入swagger的两个Render类
 from rest_framework_swagger.renderers import SwaggerUIRenderer,OpenAPIRenderer
-
+from api import urls
 from rest_framework import routers
 # 重要的是如下三行
 from rest_framework.schemas import get_schema_view
@@ -38,13 +38,10 @@ schema_view = get_schema_view(title='API',renderer_classes=[SwaggerUIRenderer,Op
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',TemplateView.as_view(template_name='index.html')),
+    #path('',TemplateView.as_view(template_name='index.html')),
     # 访问localhost:8000/docs/即可
     path('docs/', schema_view, name='swagger接口文档'), #swagger接口文档路由
-
-
-
-
+    path('api/', include("api.urls"))
 
 ]
 

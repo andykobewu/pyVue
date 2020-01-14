@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_swagger',# swagger自动生成接口文档
-    'api',
-    'login'
+    'api'
 
 ]
 # swagger 配置项
@@ -83,7 +82,7 @@ MIDDLEWARE = [
 
 
 ]
-
+CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'pyVue.urls'
 
 TEMPLATES = [
