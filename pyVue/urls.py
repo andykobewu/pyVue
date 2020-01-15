@@ -20,7 +20,7 @@ from django.views.generic.base import TemplateView
 from django.urls import path
 # 导入swagger的两个Render类
 from rest_framework_swagger.renderers import SwaggerUIRenderer,OpenAPIRenderer
-from api import urls
+from caseapi import urls
 from rest_framework import routers
 # 重要的是如下三行
 from rest_framework.schemas import get_schema_view

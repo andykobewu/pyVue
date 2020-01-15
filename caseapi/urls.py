@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
-from api import caseviews
+from caseapi import caseviews
 
 router = routers.DefaultRouter()
 router.register(r'users', caseviews.UserViewSet)

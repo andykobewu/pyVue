@@ -1,0 +1,28 @@
+GET http://www.baidu.com
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-15T031440.200.html
+
+###
+
+GET http://www.baidu.com/resources
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-15T031434.200.html
+
+###
+
+GET http://localhost:8080/resources
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8080/resources
+Accept: */*
+Cache-Control: no-cache
+
+###
+
