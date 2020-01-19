@@ -25,7 +25,7 @@ SECRET_KEY = 'dq5*vdcwe7nk_y2p=lp!g#%s=9d)g#-@4sa4eww3_25l^b!tk0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,9 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_swagger',# swagger自动生成接口文档
-    'api'
+    'caseapi',
+    'snippets.apps.SnippetsConfig'
+
 
 ]
+REST_FRAMEWORK = {
+
+}
 # swagger 配置项
 SWAGGER_SETTINGS = {
     # 基础样式
@@ -50,6 +55,9 @@ SWAGGER_SETTINGS = {
             'type': 'basic'
         }
     },
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
     # 如果需要登录才能够查看接口文档, 登录的链接使用restframework自带的.
     'LOGIN_URL': 'rest_framework:login',
     'LOGOUT_URL': 'rest_framework:logout',
