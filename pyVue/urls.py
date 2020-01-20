@@ -16,26 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.urls import path
-# 导入swagger的两个Render类
-from rest_framework_swagger.renderers import SwaggerUIRenderer,OpenAPIRenderer
 # 重要的是如下三行
 from rest_framework.schemas import get_schema_view
 from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
-from django.conf.urls import url
-from snippets import urls
-# from pyVue.views import SwaggerSchemaView,ReturnJson,StudentsApiView
+
 # 利用get_schema_view()方法，传入两个Render类得到一个schema view
 schema_view = get_schema_view(title='API',renderer_classes=[SwaggerUIRenderer,OpenAPIRenderer])
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('',TemplateView.as_view(template_name='index.html')),
     # 访问localhost:8000/docs/即可
-    path('docs/', schema_view, name='swagger接口文档'), #swagger接口文档路由
-    path('api/', include("caseapi.urls")),
+    path(r'docs/', schema_view, name='swagger接口文档'), #swagger接口文档路由
+    path('api/caseapi/', include("caseapi.urls")),
     path("api-auth/",include("rest_framework.urls", namespace="rest_framework")),
-    path(r'^', include('snippets.urls'))
+    path('api/snippets', include('snippets.urls'))
 
 ]
 
